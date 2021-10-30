@@ -30,7 +30,7 @@ handleExpenseSubmit()
 });
 
 function uploadTx() {
-    const Transaction = db.transaction(['new_tx'], 'readwrite');
+    const transaction = db.transaction(['new_tx'], 'readwrite');
     const txObjectStore = transaction.objectStore('newTransaction');
     const getAll = txObjectStore.getAll();
 }
@@ -51,7 +51,7 @@ getAll.onsuccess = function() {
                 throw new Error(serverResponse);
             }
             const transaction = db.transaction(['new_tx']);
-            const txObjectStore = transaction.objectStore('new_transaction');
+            const txObjectStore = transaction.objectStore('new_tx');
             txObjectStore.clear();
             alert('All saved transaction has been submitted!');
         })

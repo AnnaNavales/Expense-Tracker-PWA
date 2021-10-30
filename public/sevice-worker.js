@@ -1,12 +1,12 @@
 // Uncomment the lines below to set up the cache files
 
- const CACHE_NAME = 'my-site-cache-v1';
+ const CACHE_NAME = 'expense-cache-v1';
  const DATA_CACHE_NAME = 'data-cache-v1';
 
  const FILES_TO_CACHE = [
   '/',
   '/index.html',
-// '/favicon.ico',
+// '/favicon.icon',
    '/db.js',
    '/manifest.json',
    '/css/styles.css',
