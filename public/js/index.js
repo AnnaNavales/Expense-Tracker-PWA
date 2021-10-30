@@ -100,7 +100,7 @@ function sendTransaction(isAdding) {
   };
 
   // if subtracting funds, convert amount to negative number
-  if (!isAdding) {
+  if (!isAdding) { 
     transaction.value *= -1;
   }
 
