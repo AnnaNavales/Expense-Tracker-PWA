@@ -7,7 +7,7 @@
   '/',
   '/index.html',
 // '/favicon.icon',
-   '/db.js',
+   '/idb.js',
    '/manifest.json',
    '/css/styles.css',
    '/js/index.js',

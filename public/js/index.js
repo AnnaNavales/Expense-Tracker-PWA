@@ -38,7 +38,7 @@ function populateTable() {
       <td>${transaction.value}</td>
     `;
 
-    tbody.appendChild(tr);
+    tbody.appendChild(tx);
   });
 }
 
