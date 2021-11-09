@@ -1,6 +1,6 @@
 {
     "name": "Expense-Tracker-PWA",
-    "short_name": "Expense-Tracker",
+    "short_name": "Expense-Tracker-PWA",
     "icons": [
       {
         "src": "assets/images/icons/icon-72x72.png",

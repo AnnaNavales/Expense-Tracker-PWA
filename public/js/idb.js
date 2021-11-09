@@ -1,16 +1,16 @@
 let db;
-const request = indexdDB.open('expense_tracker', 1);
+const request = indexedDB.open("expense_tracker", 1);
 
 request.onupgradeneeded = function(event) {
     const db = event.target.result;
-    db.createObjectStore('new_tx', {autoIncrement: true});
+    db.createObjectStore('new_transaction', {autoIncrement: true});
 
 };
 request.onsuccess = function(event){
     db = event.target.result;
 
     if(navigator.onLine){
-         uploadTx();
+         uploadTransaction();
  }
 };
 request.onerror = function(event) {
@@ -19,8 +19,8 @@ request.onerror = function(event) {
 };
 
 function saveRecord(record) {
-    const transaction = db.transaction(['new_tx'], 'readwrite');
-    const txObjectStore = transaction.objectStore('new_tx');
+    const transaction = db.transaction(['new_transaction'], 'readwrite');
+    const txObjectStore = transaction.objectStore('new_transaction');
     txObjectStore.add(record);
 }
 handleExpenseSubmit()
@@ -29,9 +29,9 @@ handleExpenseSubmit()
     saveRecord(FormData);
 });
 
-function uploadTx() {
-    const transaction = db.transaction(['new_tx'], 'readwrite');
-    const txObjectStore = transaction.objectStore('newTransaction');
+function uploadTransaction() {
+    const transaction = db.transaction(['new_transaction'], 'readwrite');
+    const txObjectStore = transaction.objectStore('newTx');
     const getAll = txObjectStore.getAll();
 }
 
@@ -50,7 +50,7 @@ getAll.onsuccess = function() {
             if (serverResponse.message) {
                 throw new Error(serverResponse);
             }
-            const transaction = db.transaction(['new_tx']);
+            const transaction = db.transaction(['new_transaction']);
             const txObjectStore = transaction.objectStore('new_tx');
             txObjectStore.clear();
             alert('All saved transaction has been submitted!');
@@ -61,4 +61,4 @@ getAll.onsuccess = function() {
     }
 };
 // listen to app coming back online
-window.addEventListener('online', uploadTx)
+window.addEventListener('online', uploadTransaction)
