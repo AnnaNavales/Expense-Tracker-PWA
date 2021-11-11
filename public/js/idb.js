@@ -1,3 +1,9 @@
+const indexedDB =
+  window.indexedDB ||
+  window.mozIndexedDB ||
+  window.webkitIndexedDB ||
+  window.msIndexedDB ||
+    window.shimIndexedDB;
 let db;
 const request = indexedDB.open("expense_tracker", 1);
 
@@ -23,21 +29,21 @@ function saveRecord(record) {
     const txObjectStore = transaction.objectStore('new_transaction');
     txObjectStore.add(record);
 }
-handleExpenseSubmit()
-.catch(err => {
-    console.log(err);
-    saveRecord(FormData);
-});
+// handleExpenseSubmit()
+// .catch(err => {
+//     console.log(err);
+//     saveRecord(FormData);
+// });
 
 function uploadTransaction() {
     const transaction = db.transaction(['new_transaction'], 'readwrite');
-    const txObjectStore = transaction.objectStore('newTx');
+    const txObjectStore = transaction.objectStore('new_transaction');
     const getAll = txObjectStore.getAll();
-}
+
 
 getAll.onsuccess = function() {
     if (getAll.result.length > 0) {
-        fetch('/api/transaction', {
+        fetch('/api/transaction/bulk', {
             method: 'POST',
             body: JSON.stringify(getAll.result),
             headers: {
@@ -50,8 +56,8 @@ getAll.onsuccess = function() {
             if (serverResponse.message) {
                 throw new Error(serverResponse);
             }
-            const transaction = db.transaction(['new_transaction']);
-            const txObjectStore = transaction.objectStore('new_tx');
+            const transaction = db.transaction(['new_transaction'], 'readwrite');
+            const txObjectStore = transaction.objectStore('new_transaction');
             txObjectStore.clear();
             alert('All saved transaction has been submitted!');
         })
@@ -59,6 +65,7 @@ getAll.onsuccess = function() {
             console.log(err);
         });
     }
-};
+}
+}  
 // listen to app coming back online
 window.addEventListener('online', uploadTransaction)
